@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bugsnag Plugin
+Bundle-SymbolicName: com.sromku.bugsnag;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.sromku.bugsnag.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.swt,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.ui,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.text,
+ org.eclipse.core.resources,
+ org.eclipse.ui.workbench,
+ org.eclipse.jface
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: sromku (Roman Kushnarenko)
+Bundle-ClassPath: res/httpclient-4.3.3.jar,
+ res/httpcore-4.3.2.jar,
+ res/commons-logging-1.1.3.jar,
+ res/commons-codec-1.9.jar,
+ res/gson-2.2.4.jar,
+ .
+

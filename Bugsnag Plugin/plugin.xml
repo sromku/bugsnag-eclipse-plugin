@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Tools sromku"
+            id="sromku">
+      </category>
+      <view
+            name="Bugsnag"
+            icon="icons/template_obj.gif"
+            category="sromku"
+            class="com.sromku.bugsnag.views.BugsnagView"
+            id="com.sromku.bugsnag.views.BugsnagView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.ProblemView"
+               relationship="right"
+               id="com.sromku.bugsnag.views.BugsnagView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.viewActions">
+      <viewContribution
+            id="Bugsnag.viewContribution"
+            targetID="com.sromku.bugsnag.views.BugsnagView">
+         <action
+               class="com.sromku.bugsnag.actions.DetailsAction"
+               icon="icons/details_view.gif"
+               id="com.sromku.bugsnag.actions.DetailsAction"
+               label="Details"
+               style="push"
+               toolbarPath="details"
+               tooltip="Show bug details">
+         </action>
+         <action
+               class="com.sromku.bugsnag.actions.RefreshAction"
+               icon="icons/refresh.gif"
+               id="com.sromku.bugsnag.actions.RefreshAction"
+               label="Refresh"
+               style="push"
+               toolbarPath="details/refresh"
+               tooltip="Get the latest bug reports">
+         </action>
+         <menu
+               id="Bugsnag.menu"
+               label="Projects"
+               path="projects">
+            <groupMarker
+                  name="bugsnag.projects.group">
+            </groupMarker>
+         </menu>
+      </viewContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.sromku.bugsnag.preferences.BugsnagPreferencePage"
+            id="com.sromku.bugsnag.preferences.BugsnagPreferencePage"
+            name="Bugsnag">
+      </page>
+   </extension>
+</plugin>
