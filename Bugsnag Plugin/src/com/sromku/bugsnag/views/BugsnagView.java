@@ -32,8 +32,8 @@ import com.sromku.bugsnag.model.ColumnInfo;
 import com.sromku.bugsnag.model.Project;
 import com.sromku.bugsnag.preferences.PreferencesManager;
 import com.sromku.bugsnag.preferences.PreferencesManager.OnChangeListener;
-import com.sromku.bugsnag.providers.BugReportsContentProvider;
-import com.sromku.bugsnag.providers.BugReportsLabelProvider;
+import com.sromku.bugsnag.providers.ErrorsContentProvider;
+import com.sromku.bugsnag.providers.ErrorsLabelProvider;
 import com.sromku.bugsnag.utils.SelectionListenersStore;
 
 /**
@@ -48,14 +48,9 @@ public class BugsnagView extends ViewPart {
 
 	private TableViewer viewer;
 	private Action doubleClickAction;
-
+	private ErrorsLabelProvider errorsLabelProvider;
 	private Object data;
 
-	private BugReportsLabelProvider bugReportsLabelProvider;
-
-	/**
-	 * The constructor.
-	 */
 	public BugsnagView() {
 		PreferencesManager.addOnChangeListener(new OnChangeListener() {
 			@Override
@@ -66,9 +61,6 @@ public class BugsnagView extends ViewPart {
 		});
 	}
 
-	/**
-	 * Create the view itself
-	 */
 	public void createPartControl(Composite parent) {
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 
@@ -79,9 +71,9 @@ public class BugsnagView extends ViewPart {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
-		viewer.setContentProvider(new BugReportsContentProvider());
-		bugReportsLabelProvider = new BugReportsLabelProvider();
-		viewer.setLabelProvider(bugReportsLabelProvider);
+		viewer.setContentProvider(new ErrorsContentProvider());
+		errorsLabelProvider = new ErrorsLabelProvider();
+		viewer.setLabelProvider(errorsLabelProvider);
 		// viewer.setSorter(new NameSorter());
 
 		makeActions();
@@ -208,7 +200,7 @@ public class BugsnagView extends ViewPart {
 				columns[i].dispose();
 			}
 
-			for (ColumnInfo columnInfo : PreferencesManager.getSelectedColumns()) {
+			for (final ColumnInfo columnInfo : PreferencesManager.getSelectedColumns()) {
 				if (columnInfo.selected) {
 					TableViewerColumn colStatus = new TableViewerColumn(viewer, SWT.NONE);
 					colStatus.getColumn().setWidth(columnInfo.width);
@@ -216,7 +208,7 @@ public class BugsnagView extends ViewPart {
 					colStatus.setLabelProvider(new CellLabelProvider() {
 						@Override
 						public void update(ViewerCell cell) {
-							String data = bugReportsLabelProvider.getColumnText(cell.getElement(), cell.getColumnIndex());
+							String data = errorsLabelProvider.getColumnText(cell.getElement(), columnInfo);
 							cell.setText(data);
 						}
 					});
@@ -242,7 +234,6 @@ public class BugsnagView extends ViewPart {
 
 	@Override
 	public void dispose() {
-		// Clean all registered ISelectionLisntener
 		List<ISelectionListener> iSelectionListeners = SelectionListenersStore.getISelectionListeners();
 		for (ISelectionListener iSelectionListener : iSelectionListeners) {
 			getSite().getWorkbenchWindow().getSelectionService().removeSelectionListener(iSelectionListener);

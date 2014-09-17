@@ -33,7 +33,7 @@ public class Api {
 	}
 
 	public List<Project> getProjects(String authToken, String accountId) {
-		String url = BASE_URL + "account/" + accountId + "/projects/";
+		String url = BASE_URL + "accounts/" + accountId + "/projects/";
 		Type type = new TypeToken<List<Project>>(){}.getType();
 		return NetworkUtils.get(authToken, url, type);
 	}

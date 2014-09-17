@@ -17,6 +17,8 @@ import com.sromku.bugsnag.api.Api;
 import com.sromku.bugsnag.dialog.BugDetailsDialog;
 import com.sromku.bugsnag.model.Error;
 import com.sromku.bugsnag.model.Event;
+import com.sromku.bugsnag.model.Project;
+import com.sromku.bugsnag.preferences.PreferencesManager;
 import com.sromku.bugsnag.views.BugsnagView;
 
 public class DetailsAction implements IViewActionDelegate {
@@ -37,10 +39,10 @@ public class DetailsAction implements IViewActionDelegate {
 
 						@Override
 						protected IStatus run(IProgressMonitor monitor) {
+							Project project = PreferencesManager.getDefaultProject();
 							Api network = Api.getInstance();
-							// TODO -
-							String accessToken = "";
-							List<Event> events = network.getEvents(accessToken, error.id);
+							final List<Event> events = network.getEvents(project.account.authToken, error.id);
+							error.events = events;
 							Activator.runOnUIThread(new Runnable() {
 								@Override
 								public void run() {

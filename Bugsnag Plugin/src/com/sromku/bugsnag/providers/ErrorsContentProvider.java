@@ -7,7 +7,7 @@ import org.eclipse.jface.viewers.Viewer;
 
 import com.sromku.bugsnag.model.Error;
 
-public class BugReportsContentProvider implements IStructuredContentProvider {
+public class ErrorsContentProvider implements IStructuredContentProvider {
 
 	@Override
 	public void dispose() {
@@ -22,8 +22,8 @@ public class BugReportsContentProvider implements IStructuredContentProvider {
 	@Override
 	public Object[] getElements(Object inputElement) {
 		@SuppressWarnings("unchecked")
-		List<Error> bugReports = (List<Error>) inputElement;
-		return bugReports.toArray();
+		List<Error> errors = (List<Error>) inputElement;
+		return errors.toArray();
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.sromku.bugsnag.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.annotations.Expose;
@@ -16,6 +17,10 @@ public class Error {
 	public String id;
 	
 	@Expose
+	@SerializedName("last_message")
+	public String message;
+	
+	@Expose
 	@SerializedName("class")
 	public String exception;
 	
@@ -25,7 +30,7 @@ public class Error {
 	
 	@Expose
 	@SerializedName("release_stages")
-	public String[] releaseStages;
+	public Map<String, Integer> releaseStages;
 	
 	@Expose
 	@SerializedName("last_context")
@@ -58,4 +63,6 @@ public class Error {
 	@Expose
 	@SerializedName("app_versions")
 	public Map<String, Integer> appVersions;
+	
+	public List<Event> events;
 }

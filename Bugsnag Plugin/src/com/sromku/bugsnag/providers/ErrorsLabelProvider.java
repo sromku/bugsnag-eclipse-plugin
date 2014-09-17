@@ -6,9 +6,11 @@ import org.eclipse.swt.graphics.Image;
 
 import com.sromku.bugsnag.model.Column;
 import com.sromku.bugsnag.model.ColumnInfo;
+import com.sromku.bugsnag.model.Error;
 import com.sromku.bugsnag.preferences.PreferencesManager;
+import com.sromku.bugsnag.utils.Utils;
 
-public class BugReportsLabelProvider implements ITableLabelProvider {
+public class ErrorsLabelProvider implements ITableLabelProvider {
 
 	@Override
 	public void addListener(ILabelProviderListener listener) {
@@ -34,39 +36,57 @@ public class BugReportsLabelProvider implements ITableLabelProvider {
 
 	@Override
 	public String getColumnText(Object element, int columnIndex) {
-		Error error = (Error) element;
 		ColumnInfo columnInfo = PreferencesManager.getSelectedColumns().get(columnIndex);
+		return getColumnText(element, columnInfo);
+	}
+
+	public String getColumnText(Object element, ColumnInfo columnInfo) {
+		Error error = (Error) element;
 		Column column = columnInfo.getColumn();
-		// TODO -
+		String[] classLocation = error.where.split(":");
+		String clz = "";
+		Integer line = -1;
+		if (classLocation.length > 1) {
+			clz = classLocation[0];
+			try {
+				line = Integer.valueOf(classLocation[1]);
+			}
+			catch (Exception e) {
+			}
+		} else {
+			clz = classLocation[0];
+		}
+
 		switch (column) {
 		case AFFECTED_USERS:
-			break;
+			return String.valueOf(error.affectedUsers);
 		case APP_VERSION:
-			break;
+			return String.valueOf(error.appVersions);
 		case CLASS:
-			break;
+			return clz;
 		case COMMENTS:
-			break;
+			return String.valueOf(error.comments);
 		case CREATED_DATE:
-			break;
+			return Utils.toDate(error.firstReceived);
 		case EXCEPTION:
-			break;
+			return String.valueOf(error.exception);
 		case IS_RESOLVED:
-			break;
+			return String.valueOf(error.isResolved);
 		case LAST_DATE:
-			break;
+			return Utils.toDate(error.lastReceived);
 		case LOCATION:
-			break;
+			return "line: " + line;
 		case OCCURRENCES:
-			break;
+			return String.valueOf(error.occurrences);
 		case RELEASE_STAGES:
-			break;
+			return String.valueOf(error.releaseStages);
 		case SEVERITY:
-			break;
+			return error.severity;
+		case MESSAGE:
+			return error.message;
 		default:
 			break;
 		}
-		return "// TODO";
+		return "";
 	}
-
 }

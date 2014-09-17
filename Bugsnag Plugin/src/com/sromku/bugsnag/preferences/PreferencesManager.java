@@ -113,6 +113,7 @@ public class PreferencesManager {
 			defaultColumns.add(ColumnInfo.create(Column.OCCURRENCES.getName(), 80, true));
 			defaultColumns.add(ColumnInfo.create(Column.APP_VERSION.getName(), 150, true));
 			defaultColumns.add(ColumnInfo.create(Column.LAST_DATE.getName(), 150, true));
+			defaultColumns.add(ColumnInfo.create(Column.MESSAGE.getName(), 200, false));
 			defaultColumns.add(ColumnInfo.create(Column.AFFECTED_USERS.getName(), 80, false));
 			defaultColumns.add(ColumnInfo.create(Column.COMMENTS.getName(), 70, false));
 			defaultColumns.add(ColumnInfo.create(Column.CREATED_DATE.getName(), 150, false));

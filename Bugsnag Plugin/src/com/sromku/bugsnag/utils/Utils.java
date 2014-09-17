@@ -4,7 +4,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
+
+import com.sromku.bugsnag.model.ExceptionDetails;
+import com.sromku.bugsnag.model.ExceptionDetails.StacktraceLine;
 
 public class Utils {
 
@@ -30,10 +34,11 @@ public class Utils {
 		return df.format(date);
 	}
 
-	public static String getWrappedString(String[] array) {
+	public static String getWrappedString(ExceptionDetails exception) {
 		String res = "";
-		for (String str : array) {
-			res = res + str + "\n";
+		if (exception.stacktrace != null && exception.stacktrace.length > 0)
+		for (StacktraceLine stacktraceLine : exception.stacktrace) {
+			res += String.format(Locale.US, "%s(%s:%d)", stacktraceLine.method, stacktraceLine.file, stacktraceLine.line) + "\n";
 		}
 		return res;
 	}

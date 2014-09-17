@@ -5,6 +5,7 @@ public enum Column {
 	EXCEPTION("Exception"),
 	CLASS("Class"),
 	LOCATION("Location"),
+	MESSAGE("Message"),
 	OCCURRENCES("Occurrences"),
 	AFFECTED_USERS("Affected users"),
 	APP_VERSION("App version"),

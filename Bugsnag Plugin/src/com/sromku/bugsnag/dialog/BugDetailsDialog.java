@@ -14,14 +14,22 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.sromku.bugsnag.model.Error;
+import com.sromku.bugsnag.model.Event;
+import com.sromku.bugsnag.model.ExceptionDetails;
 import com.sromku.bugsnag.utils.Utils;
 
 public class BugDetailsDialog extends TitleAreaDialog {
 
-	private final Error error;
+	private Error error;
+	private Event event;
 
 	public BugDetailsDialog(Shell parentShell, Error error) {
 		super(parentShell);
+		// TODO - think how to manage multiple events.
+		// Currently the first one will be presented.
+		if (error.events != null && error.events.size() > 0) {
+			event = error.events.get(0);
+		}
 		this.error = error;
 	}
 
@@ -60,8 +68,12 @@ public class BugDetailsDialog extends TitleAreaDialog {
 		dataStacktrace.verticalAlignment = GridData.FILL_BOTH;
 
 		Text textStacktrace = new Text(container, SWT.MULTI | SWT.READ_ONLY | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		// TODO
-		textStacktrace.setText("" /*Utils.getWrappedString(error.bugDetails.stacktrace) */);
+		ExceptionDetails[] exceptions = event.exceptions;
+		if (exceptions != null && exceptions.length > 0) {
+			// TODO we will show stacktrace from last exception in the array
+			// Need to check how to manage all of them TBD
+			textStacktrace.setText(Utils.getWrappedString(exceptions[exceptions.length - 1]));
+		}
 		textStacktrace.setLayoutData(dataStacktrace);
 	}
 

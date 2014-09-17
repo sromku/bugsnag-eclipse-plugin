@@ -14,6 +14,8 @@ import org.eclipse.ui.IViewPart;
 import com.sromku.bugsnag.Activator;
 import com.sromku.bugsnag.api.Api;
 import com.sromku.bugsnag.model.Error;
+import com.sromku.bugsnag.model.Project;
+import com.sromku.bugsnag.preferences.PreferencesManager;
 import com.sromku.bugsnag.views.BugsnagView;
 
 public class RefreshAction implements IViewActionDelegate {
@@ -30,15 +32,17 @@ public class RefreshAction implements IViewActionDelegate {
 			@Override
 			protected IStatus run(final IProgressMonitor monitor) {
 				monitor.beginTask("Syncing bug reports from bugsnag", 100);
-				Api network = Api.getInstance();
-				// TODO - 
-				final List<Error> errors = network.getErrors("", "");
-				Activator.runOnUIThread(new Runnable() {
-					@Override
-					public void run() {
-						view.setData(errors);
-					}
-				});
+				Project project = PreferencesManager.getDefaultProject();
+				if (project != null) {
+					Api network = Api.getInstance();
+					final List<Error> errors = network.getErrors(project.account.authToken, project.id);
+					Activator.runOnUIThread(new Runnable() {
+						@Override
+						public void run() {
+							view.setData(errors);
+						}
+					});
+				}
 				return Status.OK_STATUS;
 			}
 		};

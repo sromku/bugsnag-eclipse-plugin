@@ -1,5 +1,6 @@
 package com.sromku.bugsnag.dialog;
 
+import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -19,7 +20,7 @@ import com.sromku.bugsnag.model.Account;
  * @author sromku
  */
 public class EditAccountDialog extends TitleAreaDialog {
-	
+
 	private Text name;
 	private Text authToken;
 	private Account account;
@@ -83,13 +84,21 @@ public class EditAccountDialog extends TitleAreaDialog {
 
 	@Override
 	protected void buttonPressed(int buttonId) {
-		String authToken = this.authToken.getText();
-		// do the connection testing:
-		account = Api.getInstance().getAccount(authToken);
-		if (account == null) {
-			return;
+		switch (buttonId) {
+		case IDialogConstants.CANCEL_ID:
+			break;
+		case IDialogConstants.OK_ID:
+			String authToken = this.authToken.getText();
+			// do the connection testing:
+			account = Api.getInstance().getAccount(authToken);
+			if (account == null) {
+				return;
+			}
+			account.authToken = this.authToken.getText();
+			break;
+		default:
+			break;
 		}
-		account.authToken = this.authToken.getText();
 		super.buttonPressed(buttonId);
 	}
 

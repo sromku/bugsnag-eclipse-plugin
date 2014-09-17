@@ -15,11 +15,11 @@ import org.apache.http.util.EntityUtils;
 
 public class NetworkUtils {
 
-	public static <T> T get(String accessToken, String url, Class<T> cls) {
+	public static <T> T get(String authToken, String url, Class<T> cls) {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
 			HttpGet httpget = new HttpGet(url);
-			httpget.setHeader("Authorization", "token " + accessToken);
+			httpget.setHeader("Authorization", "token " + authToken);
 			ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 				public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
 					HttpEntity entity = response.getEntity();
@@ -46,11 +46,11 @@ public class NetworkUtils {
 		return null;
 	}
 
-	public static <T> List<T> get(String accessToken, String url, Type projectsType) {
+	public static <T> List<T> get(String authToken, String url, Type projectsType) {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
 			HttpGet httpget = new HttpGet(url);
-			httpget.setHeader("Authorization", "token " + accessToken);
+			httpget.setHeader("Authorization", "token " + authToken);
 			ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 				public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
 					HttpEntity entity = response.getEntity();

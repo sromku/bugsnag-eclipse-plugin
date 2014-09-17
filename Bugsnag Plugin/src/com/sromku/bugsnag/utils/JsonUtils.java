@@ -14,7 +14,7 @@ public class JsonUtils {
 	private static Gson create() {
 		return new GsonBuilder()
 			.excludeFieldsWithoutExposeAnnotation()
-			.setDateFormat("YYYY-MM-DDTHH:MM:SSZ")
+			.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
 			.create();
 	}
 
