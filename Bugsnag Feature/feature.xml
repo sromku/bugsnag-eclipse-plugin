@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.sromku.bugsnag.feature"
+      label="Bugsnag"
+      version="1.0.0.qualifier"
+      provider-name="sromku (Roman Kushnarenko)">
+
+   <description url="http://www.sromku.com/">
+      Bugsnag plugin which shows you the bugs from your Bugsnag projects
++ few useful features. 
+Source code is hosted here: https://github.com/sromku/bugsnag-eclipse-plugin
+   </description>
+
+   <copyright url="http://www.sromku.com/">
+      Do what ever you like. The source code: https://github.com/sromku/bugsnag-eclipse-plugin
+   </copyright>
+
+   <license url="https://github.com/sromku/bugsnag-eclipse-plugin">
+      Apache License v2.0
+   </license>
+
+   <url>
+      <discovery label="My other open source projects" url="https://github.com/sromku"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.text"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui.workbench"/>
+      <import plugin="org.eclipse.jface"/>
+   </requires>
+
+   <plugin
+         id="com.sromku.bugsnag"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
