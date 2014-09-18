@@ -5,6 +5,8 @@ Plugin which shows you the bugs from your Bugsnag projects + few useful features
 ### Update site <img src="https://eclipse.org/artwork/images/v2/logo-800x188.png" height="24" />
 http://code.sromku.com/plugins/
 
+> When setting update site -> uncheck: 'Group items by category'
+
 ### Options
 1. Add,edit bugsnag accounts
 2. Show all projects from all accounts
