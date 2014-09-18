@@ -16,9 +16,9 @@ http://code.sromku.com/plugins/
 6. Customize view columns
 
 ### Story
-When developing android apps, I found out that fixing bugs isn't the fun part of development time, I only wanted to create more new features instead. But, leaving the bugs on the user side wasn't a good move. Then, I though that seeing the bugs in my IDE and easy accessing the line in code, will help me to resolve them faster and will not free my conscience if I choose to develop new features instead. So, this what pushed me to develop such plugin.
+When developing android apps, I found out that fixing bugs isn't the fun part of development time,	 I wanted to create new features instead. But, leaving the bugs on the user side wasn't a good thing. Then, I though that seeing the bugs in my IDE and easy accessing the line in code, will help me to resolve them faster and won't free my conscience if I choose to develop new features instead. So, this what pushed me to develop such plugin.
 
-### How to use it
+### Usage
 #### Connect accounts
 * Go to your Bugsnag account and copy `Auth token`. It looks like this:
 	
