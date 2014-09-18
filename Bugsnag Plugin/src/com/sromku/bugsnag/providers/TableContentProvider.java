@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-public class ColumnsContentProvider implements IStructuredContentProvider {
+public class TableContentProvider implements IStructuredContentProvider {
 
 	@Override
 	public void dispose() {

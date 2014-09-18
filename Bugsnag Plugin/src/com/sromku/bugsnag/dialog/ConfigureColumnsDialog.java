@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Text;
 import com.sromku.bugsnag.model.Column;
 import com.sromku.bugsnag.model.ColumnInfo;
 import com.sromku.bugsnag.preferences.PreferencesManager;
-import com.sromku.bugsnag.providers.ColumnsContentProvider;
+import com.sromku.bugsnag.providers.TableContentProvider;
 import com.sromku.bugsnag.providers.ColumnsLabelProvider;
 
 public class ConfigureColumnsDialog extends TitleAreaDialog {
@@ -79,7 +79,7 @@ public class ConfigureColumnsDialog extends TitleAreaDialog {
 		setWidth(container);
 
 		// set data
-		table.setContentProvider(new ColumnsContentProvider());
+		table.setContentProvider(new TableContentProvider());
 		table.setLabelProvider(new ColumnsLabelProvider());
 
 		// set checked state

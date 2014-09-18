@@ -35,7 +35,7 @@ public class WorkspaceUtils {
 
 		IJavaSearchScope scope = SearchEngine.createWorkspaceScope();
 		SearchEngine engine = new SearchEngine();
-		SearchPattern pattern = SearchPattern.createPattern(cls, IJavaSearchConstants.TYPE, IJavaSearchConstants.DECLARATIONS, SearchPattern.R_EXACT_MATCH);
+		SearchPattern pattern = SearchPattern.createPattern(cls.split("\\.")[0], IJavaSearchConstants.TYPE, IJavaSearchConstants.DECLARATIONS, SearchPattern.R_EXACT_MATCH);
 
 		SearchRequestor requestor = new SearchRequestor() {
 			public void acceptSearchMatch(final SearchMatch match) throws CoreException {

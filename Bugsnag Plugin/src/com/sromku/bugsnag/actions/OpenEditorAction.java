@@ -8,6 +8,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 
+import com.sromku.bugsnag.dialog.ClassSelectionDialog;
 import com.sromku.bugsnag.model.Error;
 import com.sromku.bugsnag.utils.WorkspaceUtils;
 
@@ -37,10 +38,14 @@ public class OpenEditorAction extends Action {
 		} else {
 			clz = classLocation[0];
 		}
-		List<IJavaElement> javaElement = WorkspaceUtils.search(clz);
-		if (javaElement.size() > 0) {
-			// TODO - open first, but need to be selected from dialog
-			WorkspaceUtils.openInEditor(javaElement.get(0), line);
+		List<IJavaElement> javaElements = WorkspaceUtils.search(clz);
+		if (javaElements.size() > 0) {
+			if (javaElements.size() == 1) {
+				WorkspaceUtils.openInEditor(javaElements.get(0), line);
+			} else {
+				ClassSelectionDialog classSelectionDialog= new ClassSelectionDialog(viewer.getTable().getShell(), javaElements, clz, line);
+				classSelectionDialog.open();
+			}
 		}
 
 	}
