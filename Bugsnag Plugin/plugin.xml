@@ -9,7 +9,7 @@
       </category>
       <view
             name="Bugsnag"
-            icon="icons/template_obj.gif"
+            icon="icons/favicon16.png"
             category="sromku"
             class="com.sromku.bugsnag.views.BugsnagView"
             id="com.sromku.bugsnag.views.BugsnagView">
